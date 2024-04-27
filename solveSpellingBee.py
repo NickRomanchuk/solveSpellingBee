@@ -1,9 +1,8 @@
 # Import Packages
 import re
-import webbrowser
-from selenium.webdriver.common.by import By
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 #Open Spelling Bee webpage
 driver = webdriver.Chrome()
@@ -50,8 +49,11 @@ wordList = re.sub('\\d', ' ', wordFile.read()).split()
 wordFile.close()
 for word in wordList:
     for letter in word.upper():
-        possibleLetters[letter].click()
-        time.sleep(0.1)
+        try:
+            possibleLetters[letter].click()
+            time.sleep(0.1)
+        except:
+            time.sleep(10)
     enterWord.click()
     time.sleep(0.5)
 
